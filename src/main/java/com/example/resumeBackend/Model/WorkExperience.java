@@ -25,21 +25,24 @@ public class WorkExperience {
 
     private String description;
 
-    @OneToMany(mappedBy = "experiences")
-    private List<Skill> skills;
+    @ManyToMany(mappedBy = "experiences", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Skill> skills = new java.util.ArrayList<>();
 
-    @OneToMany(mappedBy = "college", cascade = CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "college")
     private List<Project> projects;
+
+    public List<Skill> getSkills() {
+        return skills;
+    }
 
     public WorkExperience() {}
 
-    public WorkExperience(String company, String jobTitle, Date dateFrom, Date dateTo, String description, List<Skill> skills) {
+    public WorkExperience(String company, String jobTitle, Date dateFrom, Date dateTo, String description) {
         this.company = company;
         this.jobTitle = jobTitle;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.description = description;
-//        this.skills = skills;
     }
 
     public Long getId() {
@@ -85,10 +88,6 @@ public class WorkExperience {
     public void setDescription(String description) {
         this.description = description;
     }
-
-//    public void setSkills(List<Skill> skills) {
-//        this.skills = skills;
-//    }
 
     @Override
     public String toString() {

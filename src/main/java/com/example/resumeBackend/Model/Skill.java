@@ -1,9 +1,5 @@
 package com.example.resumeBackend.Model;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.springframework.data.jpa.repository.Query;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -25,10 +21,14 @@ public class Skill {
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "SKILL_EXPERIENCE",
-            inverseJoinColumns = @JoinColumn(name = "experience_id"),
-            joinColumns = @JoinColumn(name = "skill_id")
+            inverseJoinColumns = @JoinColumn(name = "experience_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id")
     )
     private List<WorkExperience> experiences = new java.util.ArrayList<>();
+
+    public List<WorkExperience> getExperiences() {
+        return experiences;
+    }
 
     protected Skill() {
     }
