@@ -18,7 +18,10 @@ public class Skill {
     @Column(name = "years_of_experience")
     private Integer yearsOfExperience;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(
+            fetch = FetchType.EAGER,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+    )
     @JoinTable(
             name = "SKILL_EXPERIENCE",
             inverseJoinColumns = @JoinColumn(name = "experience_id", referencedColumnName = "id"),

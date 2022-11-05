@@ -1,10 +1,9 @@
-package com.example.resumeBackend;
+package com.example.portfolio;
 
-import com.example.resumeBackend.Model.Skill;
-import com.example.resumeBackend.Model.WorkExperience;
-import com.example.resumeBackend.Repository.SkillRepository;
-import com.example.resumeBackend.Repository.WorkExperienceRepository;
-import com.example.resumeBackend.Service.WorkExperienceService;
+import com.example.portfolio.Model.Skill;
+import com.example.portfolio.Model.WorkExperience;
+import com.example.portfolio.Repository.SkillRepository;
+import com.example.portfolio.Service.WorkExperienceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

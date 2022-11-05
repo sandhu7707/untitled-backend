@@ -22,7 +22,11 @@ public class Education {
     
     private String description;
 
-    @OneToMany(mappedBy = "college", cascade = CascadeType.REMOVE)
+    @OneToMany(
+            fetch = FetchType.EAGER,
+            mappedBy = "college",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+    )
     private List<Project> projects;
 
     public Education(){}

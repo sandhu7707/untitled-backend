@@ -25,10 +25,18 @@ public class WorkExperience {
 
     private String description;
 
-    @ManyToMany(mappedBy = "experiences", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(
+            fetch = FetchType.EAGER,
+            mappedBy = "experiences",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+    )
     private List<Skill> skills = new java.util.ArrayList<>();
 
-    @ManyToMany(mappedBy = "college")
+    @OneToMany(
+            fetch = FetchType.EAGER,
+            mappedBy = "college",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+    )
     private List<Project> projects;
 
     public List<Skill> getSkills() {

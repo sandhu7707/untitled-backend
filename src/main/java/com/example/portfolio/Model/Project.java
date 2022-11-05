@@ -24,8 +24,10 @@ public class Project {
 
     private String description;
 
-    //TODO: can either be education or workExperience
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(
+            fetch = FetchType.EAGER,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+    )
     @JoinTable(
             name = "EDUCATION_PROJECT",
             inverseJoinColumns = @JoinColumn(name = "education_id"),
@@ -33,7 +35,10 @@ public class Project {
     )
     private Education college;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(
+            fetch = FetchType.EAGER,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+    )
     @JoinTable(
             name = "EXPERIENCE_PROJECT",
             inverseJoinColumns = @JoinColumn(name = "experience_id"),
