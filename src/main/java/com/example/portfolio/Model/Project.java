@@ -1,20 +1,20 @@
-package com.example.resumeBackend.Model;
+package com.example.portfolio.Model;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="PROJECT")
+@Table(name = "PROJECT")
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String title;
 
-    @Column(name = "type_id")
-    private Long typeId;
+    @Column(name = "project_type")
+    private Character type;
 
     @Column(name = "date_from")
     private Date dateFrom;
@@ -46,17 +46,24 @@ public class Project {
     )
     private WorkExperience company;
 
-    public Project() {}
+    public Project() {
+    }
 
-    public Project(String title, Long typeId, Date dateFrom, Date dateTo, String description) {
+    public Project(
+            String title,
+            Character type,
+            Date dateFrom,
+            Date dateTo,
+            String description
+    ) {
         this.title = title;
-        this.typeId = typeId;
+        this.type = type;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.description = description;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -68,12 +75,12 @@ public class Project {
         this.title = title;
     }
 
-    public long getTypeId() {
-        return typeId;
+    public char getType() {
+        return type;
     }
 
-    public void setTypeId(long typeId) {
-        this.typeId = typeId;
+    public void setType(Character type) {
+        this.type = type;
     }
 
     public Date getDateFrom() {
@@ -100,12 +107,28 @@ public class Project {
         this.description = description;
     }
 
+    public Education getCollege() {
+        return college;
+    }
+
+    public void setCollege(Education college) {
+        this.college = college;
+    }
+
+    public WorkExperience getCompany() {
+        return company;
+    }
+
+    public void setCompany(WorkExperience company) {
+        this.company = company;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", typeId=" + typeId +
+                ", type=" + type +
                 ", dateFrom=" + dateFrom +
                 ", dateTo=" + dateTo +
                 ", description='" + description + '\'' +

@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>resumeBackend</artifactId>
+    <artifactId>portfolio</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>resumeBackend</name>
+    <name>portfolioBackend</name>
     <description>great and secure resume building</description>
     <properties>
         <java.version>17</java.version>

@@ -45,8 +45,10 @@ CREATE TABLE `PROJECT` (
   `date_from` date DEFAULT NULL,
   `date_to` date DEFAULT NULL,
   `description` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1002 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `project_type` char(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `PROJECT_chk_1` CHECK (((`project_type` = (_utf8mb4'E' | `project_type`)) = _utf8mb4'W'))
+) ENGINE=InnoDB AUTO_INCREMENT=1002 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 CREATE TABLE `SKILL` (
   `id` int NOT NULL AUTO_INCREMENT,

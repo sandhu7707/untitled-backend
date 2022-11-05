@@ -1,4 +1,4 @@
-package com.example.resumeBackend.Model;
+package com.example.portfolio.Model;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,25 +22,15 @@ public class Skill {
             fetch = FetchType.EAGER,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE}
     )
-    @JoinTable(
-            name = "SKILL_EXPERIENCE",
-            inverseJoinColumns = @JoinColumn(name = "experience_id", referencedColumnName = "id"),
-            joinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id")
-    )
-    private List<WorkExperience> experiences = new java.util.ArrayList<>();
+    private List<WorkExperience> experiences;
 
-    public List<WorkExperience> getExperiences() {
-        return experiences;
+    public Skill() {
     }
 
-    protected Skill() {
-    }
-
-    public Skill(String title, int rating, int yearsOfExperience, List<WorkExperience> experiences) {
+    public Skill(String title, int rating, int yearsOfExperience) {
         this.title = title;
         this.rating = rating;
         this.yearsOfExperience = yearsOfExperience;
-        this.experiences = experiences;
     }
 
     public Long getId() {
@@ -61,6 +51,10 @@ public class Skill {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public List<WorkExperience> getExperiences() {
+        return experiences;
     }
 
     public void setExperiences(List<WorkExperience> experience) {

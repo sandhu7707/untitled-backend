@@ -1,4 +1,4 @@
-package com.example.resumeBackend.Model;
+package com.example.portfolio.Model;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,16 +10,16 @@ public class Education {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    
+    private Long id;
+
     private String college;
 
     private String degree;
-    
-    private Date date_from;
-    
-    private Date date_to;
-    
+
+    private Date dateFrom;
+
+    private Date dateTo;
+
     private String description;
 
     @OneToMany(
@@ -29,17 +29,24 @@ public class Education {
     )
     private List<Project> projects;
 
-    public Education(){}
+    public Education() {
+    }
 
-    public Education(String college, String degree, Date date_from, Date date_to, String description) {
+    public Education(
+            String college,
+            String degree,
+            Date dateFrom,
+            Date dateTo,
+            String description
+    ) {
         this.college = college;
         this.degree = degree;
-        this.date_from = date_from;
-        this.date_to = date_to;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
         this.description = description;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -59,20 +66,20 @@ public class Education {
         this.degree = degree;
     }
 
-    public Date getDate_from() {
-        return date_from;
+    public Date getDateFrom() {
+        return dateFrom;
     }
 
-    public void setDate_from(Date date_from) {
-        this.date_from = date_from;
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
     }
 
-    public Date getDate_to() {
-        return date_to;
+    public Date getDateTo() {
+        return dateTo;
     }
 
-    public void setDate_to(Date date_to) {
-        this.date_to = date_to;
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
     }
 
     public String getDescription() {
@@ -83,14 +90,22 @@ public class Education {
         this.description = description;
     }
 
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
     @Override
     public String toString() {
         return "Education{" +
                 "id=" + id +
                 ", college='" + college + '\'' +
                 ", degree='" + degree + '\'' +
-                ", date_from=" + date_from +
-                ", date_to=" + date_to +
+                ", date_from=" + dateFrom +
+                ", date_to=" + dateTo +
                 ", description='" + description + '\'' +
                 '}';
     }

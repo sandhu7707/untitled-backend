@@ -1,8 +1,9 @@
-package com.example.resumeBackend.Model;
+package com.example.portfolio.Model;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "EXPERIENCE")
@@ -25,27 +26,55 @@ public class WorkExperience {
 
     private String description;
 
+    public void setSkills(Set<Skill> skills) {
+        this.skills = skills;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
+
+    /*
+      using Sets instead of List to avoid MultipleBagFetchException,
+      MultipleBagFetchException is caused by hibernate as it can't do mapping for all the columns correctly for all the entities after cartesian product is formed if we use list, somehow,
+      it works for sets though!
+      TODO: To make it more efficient,
+      you can lazy load these two fields and write queries
+      to load one at a time, avoiding cartesian product by using distinct parameters in queries
+    * */
     @ManyToMany(
             fetch = FetchType.EAGER,
             mappedBy = "experiences",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE}
     )
-    private List<Skill> skills = new java.util.ArrayList<>();
+    private Set<Skill> skills;
 
     @OneToMany(
             fetch = FetchType.EAGER,
-            mappedBy = "college",
+            mappedBy = "company",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE}
     )
-    private List<Project> projects;
+    private Set<Project> projects;
 
     public List<Skill> getSkills() {
-        return skills;
+        return skills.stream().toList();
     }
 
-    public WorkExperience() {}
+    public WorkExperience() {
+    }
 
-    public WorkExperience(String company, String jobTitle, Date dateFrom, Date dateTo, String description) {
+    public WorkExperience(
+            String company,
+            String jobTitle,
+            Date dateFrom,
+            Date dateTo,
+            String description
+    ) {
+
         this.company = company;
         this.jobTitle = jobTitle;
         this.dateFrom = dateFrom;
