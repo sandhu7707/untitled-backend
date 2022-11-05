@@ -13,8 +13,8 @@ public class ProjectService {
     @Autowired
     ProjectRepository projectRepository;
 
-    public void createProject(Project project) {
-        projectRepository.save(project);
+    public Project createProject(Project project) {
+        return projectRepository.save(project);
     }
 
     public List<Project> getProjects() {

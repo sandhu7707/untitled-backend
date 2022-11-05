@@ -13,8 +13,8 @@ public class WorkExperienceService {
     @Autowired
     WorkExperienceRepository workExperienceRepository;
 
-    public void createWorkExperience(WorkExperience workExperience) {
-        workExperienceRepository.save(workExperience);
+    public WorkExperience createWorkExperience(WorkExperience workExperience) {
+        return workExperienceRepository.save(workExperience);
     }
 
     public List<WorkExperience> getWorkExperiences() {

@@ -13,8 +13,8 @@ public class SkillService {
     @Autowired
     SkillRepository skillRepository;
 
-    public void createSkill(Skill skill) {
-        skillRepository.save(skill);
+    public Skill createSkill(Skill skill) {
+        return skillRepository.save(skill);
     }
 
     public List<Skill> getSkills() {

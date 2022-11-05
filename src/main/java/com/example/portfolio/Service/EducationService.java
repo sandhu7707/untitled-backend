@@ -13,8 +13,8 @@ public class EducationService {
     @Autowired
     EducationRepository educationRepository;
 
-    public void createEducation(Education education) {
-        educationRepository.save(education);
+    public Education createEducation(Education education) {
+        return educationRepository.save(education);
     }
 
     public List<Education> getEducations() {

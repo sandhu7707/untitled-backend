@@ -2,11 +2,17 @@ package com.example.portfolio.Service;
 
 import com.example.portfolio.DTO.ResumeDTO;
 import com.example.portfolio.Mapper;
+import com.example.portfolio.Model.Education;
 import com.example.portfolio.Model.Project;
 import com.example.portfolio.Model.Skill;
 
+import com.example.portfolio.Model.WorkExperience;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import static com.example.portfolio.Mapper.DTOToEntity;
 
@@ -25,49 +31,54 @@ public class ResumeService {
     @Autowired
     EducationService educationService;
 
-    //TODO: saves some of the things multiple times
     public void saveResume(ResumeDTO resumeDTO) {
+
+        List<WorkExperience> savedWorkExperiences = new ArrayList<>();
+        List<Education> savedEducations = new ArrayList<>();
+
+        resumeDTO.getWorkExperienceList().forEach(we -> {
+            savedWorkExperiences.add(workExperienceService.createWorkExperience(DTOToEntity(we)));
+        });
+
+        resumeDTO.getEducationList().forEach(e -> {
+            savedEducations.add(educationService.createEducation(DTOToEntity(e)));
+        });
 
         resumeDTO.getSkillList().forEach(s -> {
             Skill skill = DTOToEntity(s);
 
             if (s.getYearsOfExperience() != 0) {
                 skill.setExperiences(
-                        resumeDTO.getWorkExperienceList().stream()
+                        savedWorkExperiences.stream()
                                 .filter(w -> s.getExperienceIds().contains(w.getId()))
-                                .map(Mapper::DTOToEntity).toList());
+                                .toList());
             }
 
             skillService.createSkill(skill);
         });
 
         resumeDTO.getProjectList().forEach(p -> {
+
             Project project = DTOToEntity(p);
 
             if (p.getType() == 'W') {
 
-                resumeDTO.getWorkExperienceList().stream()
-                        .filter(we -> p.getCompanyId() == we.getId())
+                savedWorkExperiences.stream()
+                        .filter(we -> Objects.equals(p.getCompanyId(), we.getId()))
                         .findAny()
-                        .ifPresent(experienceDTO -> project.setCompany(DTOToEntity(experienceDTO)));
+                        .ifPresent(project::setCompany);
+
             } else if (p.getType() == 'E') {
 
-                resumeDTO.getEducationList().stream()
-                        .filter(e -> p.getCollegeId() == e.getId())
+                savedEducations.stream()
+                        .filter(e -> Objects.equals(p.getCollegeId(), e.getId()))
                         .findAny()
-                        .ifPresent(educationDTO -> project.setCollege(DTOToEntity(educationDTO)));
+                        .ifPresent(project::setCollege);
             }
 
             projectService.createProject(project);
         });
 
-        resumeDTO.getWorkExperienceList().forEach(we -> {
-            workExperienceService.createWorkExperience(DTOToEntity(we));
-        });
-
-        resumeDTO.getEducationList().forEach(e -> {
-            educationService.createEducation(DTOToEntity(e));
-        });
     }
 
     public ResumeDTO getResume() {
