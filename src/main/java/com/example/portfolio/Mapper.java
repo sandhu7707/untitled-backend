@@ -13,6 +13,7 @@ public class Mapper {
 
     public static Skill DTOToEntity(SkillDTO skillDTO) {
         return new Skill(
+                skillDTO.getId(),
                 skillDTO.getTitle(),
                 skillDTO.getRating(),
                 skillDTO.getYearsOfExperience()
@@ -21,6 +22,7 @@ public class Mapper {
 
     public static Project DTOToEntity(ProjectDTO projectDTO) {
         return new Project(
+                projectDTO.getId(),
                 projectDTO.getTitle(),
                 projectDTO.getType(),
                 projectDTO.getDateFrom(),
@@ -31,6 +33,7 @@ public class Mapper {
 
     public static WorkExperience DTOToEntity(WorkExperienceDTO workExperienceDTO) {
         return new WorkExperience(
+                workExperienceDTO.getId(),
                 workExperienceDTO.getCompany(),
                 workExperienceDTO.getJobTitle(),
                 workExperienceDTO.getDateFrom(),
@@ -41,6 +44,7 @@ public class Mapper {
 
     public static Education DTOToEntity(EducationDTO educationDTO) {
         return new Education(
+                educationDTO.getId(),
                 educationDTO.getCollege(),
                 educationDTO.getDegree(),
                 educationDTO.getDateFrom(),

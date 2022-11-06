@@ -50,12 +50,14 @@ public class Project {
     }
 
     public Project(
+            Long id,
             String title,
             Character type,
             Date dateFrom,
             Date dateTo,
             String description
     ) {
+        this.id = id;
         this.title = title;
         this.type = type;
         this.dateFrom = dateFrom;

@@ -68,13 +68,14 @@ public class WorkExperience {
     }
 
     public WorkExperience(
+            Long id,
             String company,
             String jobTitle,
             Date dateFrom,
             Date dateTo,
             String description
     ) {
-
+        this.id = id;
         this.company = company;
         this.jobTitle = jobTitle;
         this.dateFrom = dateFrom;

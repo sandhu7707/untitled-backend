@@ -27,7 +27,8 @@ public class Skill {
     public Skill() {
     }
 
-    public Skill(String title, int rating, int yearsOfExperience) {
+    public Skill(Long id, String title, int rating, int yearsOfExperience) {
+        this.id = id;
         this.title = title;
         this.rating = rating;
         this.yearsOfExperience = yearsOfExperience;

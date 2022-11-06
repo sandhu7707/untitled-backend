@@ -33,12 +33,14 @@ public class Education {
     }
 
     public Education(
+            Long id,
             String college,
             String degree,
             Date dateFrom,
             Date dateTo,
             String description
     ) {
+        this.id = id;
         this.college = college;
         this.degree = degree;
         this.dateFrom = dateFrom;
