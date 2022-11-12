@@ -47,7 +47,7 @@ public class ResumeService {
         resumeDTO.getSkillList().forEach(s -> {
             Skill skill = DTOToEntity(s);
 
-            if (s.getYearsOfExperience() != 0) {
+            if (s.getExperienceIds() != null && !s.getExperienceIds().isEmpty()) {
                 skill.setExperiences(
                         savedWorkExperiences.stream()
                                 .filter(w -> s.getExperienceIds().contains(w.getId()))
