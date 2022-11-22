@@ -1,0 +1,78 @@
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "contactNumber": 1234567891,
+  "emailAddress": "email@address.com",
+  "username": "snoopdogg",
+  "password": "notneeded",
+  "profile": {
+    "id": 4,
+    "skillList": [
+      {
+        "title": "skill",
+        "rating": 4,
+        "yearsOfExperience": 2,
+        "workExperienceIds": [
+          1
+        ]
+      }
+    ],
+    "educationList": [
+      {
+        "id": 1,
+        "college": "college",
+        "degree": "mai",
+        "dateFrom": "2022-01-01T07:11:06.195+00:00",
+        "dateTo": "2022-12-03T07:11:06.195+00:00",
+        "description": "description",
+        "projectIds": []
+      },
+      {
+        "id": 2,
+        "college": "college",
+        "degree": "mai",
+        "dateFrom": "2022-01-01T07:11:06.195+00:00",
+        "dateTo": "2022-12-03T07:11:06.195+00:00",
+        "description": "description",
+        "projectIds": []
+      }
+    ],
+    "workExperienceList": [
+      {
+        "id": 1,
+        "company": "company",
+        "jobTitle": "local legend",
+        "dateFrom": "2020-01-01T07:11:06.195+00:00",
+        "dateTo": "2024-11-03T07:11:06.195+00:00",
+        "description": "description",
+        "skillIds": [
+          1
+        ]
+      },
+      {
+        "id": 2,
+        "company": "company",
+        "jobTitle": "global legend",
+        "dateFrom": "2020-01-01T07:11:06.195+00:00",
+        "dateTo": "2024-11-03T07:11:06.195+00:00",
+        "description": "description",
+        "skillIds": [
+          7
+        ],
+        "projectIds": [
+        ]
+      }
+    ],
+    "projectList": [
+
+      {
+        "id": 1,
+        "title": "title",
+        "dateFrom": "2022-11-01T07:11:06.195+00:00",
+        "dateTo": "2022-11-03T07:11:06.195+00:00",
+        "description": "description",
+        "collegeId": 1
+      }
+    ]
+  }
+}

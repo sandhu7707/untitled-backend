@@ -2,8 +2,9 @@ package com.example.portfolio.DTO;
 
 import java.util.List;
 
-public class ResumeDTO {
+public class ProfileDTO {
 
+    private Long id;
     private List<SkillDTO> skillList;
 
     private List<EducationDTO> educationList;
@@ -12,16 +13,25 @@ public class ResumeDTO {
 
     private List<ProjectDTO> projectList;
 
-    public ResumeDTO(
+    public ProfileDTO(
+            Long id,
             List<SkillDTO> skillList,
             List<EducationDTO> educationList,
             List<WorkExperienceDTO> workExperienceList,
-            List<ProjectDTO> projectList
-    ) {
+            List<ProjectDTO> projectList) {
+        this.id = id;
         this.skillList = skillList;
         this.educationList = educationList;
         this.workExperienceList = workExperienceList;
         this.projectList = projectList;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public List<SkillDTO> getSkillList() {
@@ -58,7 +68,7 @@ public class ResumeDTO {
 
     @Override
     public String toString() {
-        return "ResumeDTO{" +
+        return "ProfileDTO{" +
                 "skillList=" + skillList +
                 ", educationList=" + educationList +
                 ", workExperienceList=" + workExperienceList +

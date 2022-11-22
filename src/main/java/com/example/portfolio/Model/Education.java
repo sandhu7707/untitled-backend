@@ -16,8 +16,10 @@ public class Education {
 
     private String degree;
 
+    @Column(name="date_from")
     private Date dateFrom;
 
+    @Column(name="date_to")
     private Date dateTo;
 
     private String description;
@@ -32,14 +34,7 @@ public class Education {
     public Education() {
     }
 
-    public Education(
-            Long id,
-            String college,
-            String degree,
-            Date dateFrom,
-            Date dateTo,
-            String description
-    ) {
+    public Education(Long id, String college, String degree, Date dateFrom, Date dateTo, String description) {
         this.id = id;
         this.college = college;
         this.degree = degree;

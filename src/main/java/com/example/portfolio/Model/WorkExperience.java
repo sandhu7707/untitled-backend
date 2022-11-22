@@ -46,12 +46,8 @@ public class WorkExperience {
       you can lazy load these two fields and write queries
       to load one at a time, avoiding cartesian product by using distinct parameters in queries
     * */
-    @ManyToMany(
-            fetch = FetchType.EAGER,
-            mappedBy = "experiences",
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE}
-    )
-    private Set<Skill> skills;
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "workExperiences", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Skill> skills = new java.util.LinkedHashSet<>();
 
     @OneToMany(
             fetch = FetchType.EAGER,
@@ -67,14 +63,7 @@ public class WorkExperience {
     public WorkExperience() {
     }
 
-    public WorkExperience(
-            Long id,
-            String company,
-            String jobTitle,
-            Date dateFrom,
-            Date dateTo,
-            String description
-    ) {
+    public WorkExperience(Long id, String company, String jobTitle, Date dateFrom, Date dateTo, String description) {
         this.id = id;
         this.company = company;
         this.jobTitle = jobTitle;

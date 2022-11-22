@@ -28,41 +28,26 @@ public class Project {
             fetch = FetchType.EAGER,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE}
     )
-    @JoinTable(
-            name = "EDUCATION_PROJECT",
-            inverseJoinColumns = @JoinColumn(name = "education_id"),
-            joinColumns = @JoinColumn(name = "project_id")
-    )
     private Education college;
 
     @ManyToOne(
             fetch = FetchType.EAGER,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE}
     )
-    @JoinTable(
-            name = "EXPERIENCE_PROJECT",
-            inverseJoinColumns = @JoinColumn(name = "experience_id"),
-            joinColumns = @JoinColumn(name = "project_id")
-    )
     private WorkExperience company;
 
     public Project() {
     }
 
-    public Project(
-            Long id,
-            String title,
-            Character type,
-            Date dateFrom,
-            Date dateTo,
-            String description
-    ) {
+    public Project(Long id, String title, Character type, Date dateFrom, Date dateTo, String description, Education college, WorkExperience company) {
         this.id = id;
         this.title = title;
         this.type = type;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.description = description;
+        this.college = college;
+        this.company = company;
     }
 
     public Long getId() {
@@ -114,7 +99,12 @@ public class Project {
     }
 
     public void setCollege(Education college) {
-        this.college = college;
+        if(this.company == null) {
+            this.college = college;
+        }
+        else{
+            throw new Error(new Exception(" project can't have both company and college id "));
+        }
     }
 
     public WorkExperience getCompany() {
@@ -122,7 +112,12 @@ public class Project {
     }
 
     public void setCompany(WorkExperience company) {
-        this.company = company;
+        if(this.college == null){
+            this.company = company;
+        }
+        else{
+            throw new Error(new Exception(" project can't have both company and college id "));
+        }
     }
 
     @Override

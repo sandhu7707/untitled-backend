@@ -1,33 +1,37 @@
 package com.example.portfolio;
 
-import com.example.portfolio.DTO.EducationDTO;
-import com.example.portfolio.DTO.ProjectDTO;
-import com.example.portfolio.DTO.SkillDTO;
-import com.example.portfolio.DTO.WorkExperienceDTO;
-import com.example.portfolio.Model.Education;
-import com.example.portfolio.Model.Project;
-import com.example.portfolio.Model.Skill;
-import com.example.portfolio.Model.WorkExperience;
+import com.example.portfolio.DTO.*;
+import com.example.portfolio.Model.*;
+import com.example.portfolio.Service.WorkExperienceService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class Mapper {
 
-    public static Skill DTOToEntity(SkillDTO skillDTO) {
+    @Autowired
+    WorkExperienceService workExperienceService;
+
+    public static Skill DTOToEntity(SkillDTO skillDTO, List<WorkExperience> workExperienceList) {
         return new Skill(
                 skillDTO.getId(),
                 skillDTO.getTitle(),
                 skillDTO.getRating(),
-                skillDTO.getYearsOfExperience()
+                skillDTO.getYearsOfExperience(),
+                workExperienceList
         );
     }
 
-    public static Project DTOToEntity(ProjectDTO projectDTO) {
+    public static Project DTOToEntity(ProjectDTO projectDTO, Education college, WorkExperience company) {
         return new Project(
                 projectDTO.getId(),
                 projectDTO.getTitle(),
                 projectDTO.getType(),
                 projectDTO.getDateFrom(),
                 projectDTO.getDateTo(),
-                projectDTO.getDescription()
+                projectDTO.getDescription(),
+                college,
+                company
         );
     }
 
@@ -50,6 +54,19 @@ public class Mapper {
                 educationDTO.getDateFrom(),
                 educationDTO.getDateTo(),
                 educationDTO.getDescription()
+        );
+    }
+
+    public static UserInfo DTOToEntity(UserInfoDTO userInfoDTO, Profile profile) {
+        return new UserInfo(
+                userInfoDTO.getId(),
+                userInfoDTO.getFirstName(),
+                userInfoDTO.getLastName(),
+                userInfoDTO.getContactNumber(),
+                userInfoDTO.getEmailAddress(),
+                profile,
+                userInfoDTO.getUsername(),
+                userInfoDTO.getPassword()
         );
     }
 
@@ -84,7 +101,7 @@ public class Mapper {
                 skill.getTitle(),
                 skill.getRating(),
                 skill.getYearsOfExperience(),
-                skill.getExperiences().stream().map(WorkExperience::getId).toList()
+                skill.getWorkExperiences().stream().map(WorkExperience::getId).toList()
         );
     }
 
@@ -98,6 +115,28 @@ public class Mapper {
                 project.getDescription(),
                 getIdIfNotNull(project.getCollege()),
                 getIdIfNotNull(project.getCompany())
+        );
+    }
+
+    public static ProfileDTO entityToDTO(Profile profile) {
+        return new ProfileDTO(
+                profile.getId(),
+                profile.getSkillList().stream().map(Mapper::entityToDTO).toList(),
+                profile.getEducationList().stream().map(Mapper::entityToDTO).toList(),
+                profile.getWorkExperienceList().stream().map(Mapper::entityToDTO).toList(),
+                profile.getProjectList().stream().map(Mapper::entityToDTO).toList()
+        );
+    }
+
+    public static UserInfoDTO entityToDTO (UserInfo userInfo){
+        return new UserInfoDTO(
+                userInfo.getId(),
+                entityToDTO(userInfo.getProfile()),
+                userInfo.getFirstName(),
+                userInfo.getLastName(),
+                userInfo.getContactNumber(),
+                userInfo.getEmailAddress()
+                // not sending username and password, fix the security stuff first
         );
     }
 

@@ -11,20 +11,20 @@ public class SkillDTO {
 
     private Integer yearsOfExperience;
 
-    private List<Long> experienceIds;
+    private List<Long> workExperienceIds;
 
     public SkillDTO(
             Long id,
             String title,
             int rating,
             Integer yearsOfExperience,
-            List<Long> experienceIds
+            List<Long> workExperienceIds
     ) {
         this.id = id;
         this.title = title;
         this.rating = rating;
         this.yearsOfExperience = yearsOfExperience;
-        this.experienceIds = experienceIds;
+        this.workExperienceIds = workExperienceIds;
     }
 
     public Long getId() {
@@ -59,12 +59,12 @@ public class SkillDTO {
         this.yearsOfExperience = yearsOfExperience;
     }
 
-    public List<Long> getExperienceIds() {
-        return experienceIds;
+    public List<Long> getWorkExperienceIds() {
+        return workExperienceIds;
     }
 
-    public void setExperienceIds(List<Long> experienceIds) {
-        this.experienceIds = experienceIds;
+    public void setWorkExperienceIds(List<Long> workExperienceIds) {
+        this.workExperienceIds = workExperienceIds;
     }
 
     @Override
@@ -74,7 +74,7 @@ public class SkillDTO {
                 ", title='" + title + '\'' +
                 ", rating=" + rating +
                 ", yearsOfExperience=" + yearsOfExperience +
-                ", experienceIds=" + experienceIds +
+                ", experienceIds=" + workExperienceIds +
                 '}';
     }
 }
